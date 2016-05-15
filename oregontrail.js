@@ -354,71 +354,72 @@ function turnCheck() {
 	if(turnNumber == 1) {
 
 		 console.log("APRIL 12");
-}
-if(turnNumber == 2) {
-		 console.log("APRIL 26 ");
-}
-if(turnNumber == 3) {
-		console.log("MAY 10");
-}
-if(turnNumber == 4) {
-		console.log("MAY 24 ");
-		}
-if(turnNumber == 5) {
-		console.log("JUNE 7 ");
-}
-if(turnNumber == 6) {
-		console.log("JUNE 21 ");
-}
-if(turnNumber == 7) {
-		console.log("JULY 5 ");
-}
-if(turnNumber == 8) {
-		console.log("JULY 19 ");
-}
-if(turnNumber == 9) {
-		console.log("AUGUST 2 ");
-}
-if(turnNumber == 10) {
-		console.log("AUGUST 16 ");
-}
-if(turnNumber == 11) {
-		console.log("AUGUST 31 ");
-}
-if(turnNumber == 12) {
-		console.log("SEPTEMBER 13");
-}
-if(turnNumber == 13) {
-		console.log("SEPTEMBER 27 ");
-}
-if(turnNumber == 14) {
-		 console.log("OCTOBER 11 ");
-}
-if(turnNumber == 15) {
-		 console.log("OCTOBER 25");
-}
-if(turnNumber == 16) {
-	console.log("NOVEMBER 8 ");
-}
-if(turnNumber == 17) {
-		console.log("NOVEMBER 22 ");
-	}
-if(turnNumber == 18) {
-		console.log("DECEMBER 6 ");
-}
-if(turnNumber == 19) {
-		 console.log("DECEMBER 20 ");
-		 }
-		 if(turnNumber == 20) {
-		console.log("YOU HAVE BEEN ON THE TRAIL TOO LONG  ------ \r\n");
-		console.log("YOUR FAMILY DIES IN THE FIRST BLIZZARD OF WINTER");
-		causeOfDeath = "got too tired";
-		formalities();
-		return; //this might be okay since it should exit the function after the end of the game, maybe take out
-		////console.crlf();
-		}
-		console.log(" 1847\r\n");
-		turnStart();
+    }
+    if(turnNumber == 2) {
+             console.log("APRIL 26 ");
+    }
+    if(turnNumber == 3) {
+            console.log("MAY 10");
+    }
+    if(turnNumber == 4) {
+            console.log("MAY 24 ");
+            }
+    if(turnNumber == 5) {
+            console.log("JUNE 7 ");
+    }
+    if(turnNumber == 6) {
+            console.log("JUNE 21 ");
+    }
+    if(turnNumber == 7) {
+            console.log("JULY 5 ");
+    }
+    if(turnNumber == 8) {
+            console.log("JULY 19 ");
+    }
+    if(turnNumber == 9) {
+            console.log("AUGUST 2 ");
+    }
+    if(turnNumber == 10) {
+            console.log("AUGUST 16 ");
+    }
+    if(turnNumber == 11) {
+            console.log("AUGUST 31 ");
+    }
+    if(turnNumber == 12) {
+            console.log("SEPTEMBER 13");
+    }
+    if(turnNumber == 13) {
+            console.log("SEPTEMBER 27 ");
+    }
+    if(turnNumber == 14) {
+             console.log("OCTOBER 11 ");
+    }
+    if(turnNumber == 15) {
+             console.log("OCTOBER 25");
+    }
+    if(turnNumber == 16) {
+        console.log("NOVEMBER 8 ");
+    }
+    if(turnNumber == 17) {
+            console.log("NOVEMBER 22 ");
+        }
+    if(turnNumber == 18) {
+            console.log("DECEMBER 6 ");
+    }
+    if(turnNumber == 19) {
+             console.log("DECEMBER 20 ");
+    }
+    if(turnNumber == 20) {
+            console.log("YOU HAVE BEEN ON THE TRAIL TOO LONG  ------ \r\n");
+            console.log("YOUR FAMILY DIES IN THE FIRST BLIZZARD OF WINTER");
+            causeOfDeath = "got too tired";
+            formalities();
+            return; //this might be okay since it should exit the function after the end of the game, maybe take out
+            ////console.crlf();
+    }
+
+    console.log(" 1847\r\n");
+    turnStart();
 }
 else {
 finalTurn();
@@ -438,9 +439,9 @@ function turnChoice() {
 	//console.crlf();
 	console.log("--" + foodAMT + "-- --" + ammoAMT + "--\1b-- " + clothingAMT + "----" + supplyAMT + " ----" + cashInitialPurchase);
 	if(flagForFortOption != -1) {
-	flagForFortOption = flagForFortOption * -1; 
-	fortHuntContinue();
-}
+        flagForFortOption = flagForFortOption * -1; 
+        fortHuntContinue();
+    }
 }
 function southPassFlagCheck(){
 	//console.log("south pass flag check");
@@ -1047,11 +1048,11 @@ if(eventNo == 15) {
 function mountains()  {
 	//console.pause();
 	if(totalMileage <= 950) {
-	turnCheck();
-	return;//this is the sketchiest one it seems to leave in.
+	   turnCheck();
+	   return;//this is the sketchiest one it seems to leave in.
 	}
 	if(Math.random() * 10< 9-((Math.pow(totalMileage/100-15,2)+72)/(Math.pow(totalMileage/100-15),2)+12)) {
-	hailStorm();
+	   hailStorm();
 	}
 console.log("\r\nRUGGED MOUNTAINS /\n^.~/^.~/^.~\r\n");
 //console.pause();
