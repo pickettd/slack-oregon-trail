@@ -76,7 +76,7 @@ controller.hears(['oregontime'],['direct_message','direct_mention'],function(bot
 });
 
 askInstructions = function(response, convo) {
-  convo.ask("We're going to play Oregon Trail! Do you need instructions?", function(response, convo) {
+  convo.ask("We're going to play Oregon Trail! Do you need instructions (Yes/No)?", function(response, convo) {
     var yesNo = response.text.toUpperCase();
     if(yesNo[0] == "Y") {
       postInstructions(convo);
@@ -88,14 +88,37 @@ askInstructions = function(response, convo) {
 
 askRifle = function(response, convo) {
   postRifle(convo);
-  convo.ask("SO HOW GOOD A SHOT ARE YOU WITH YOUR RIFLE?", function(response, convo) {
-    convo.say("Ok.");
-    askWhereDeliver(response, convo);
-    convo.next();
+  convo.ask("SO HOW GOOD A SHOT ARE YOU WITH YOUR RIFLE (1-5)?", [{
+    pattern: '[1-5]',
+    callback: function(response, convo) {
+      convo.say("Ok.");
+      askWhereDeliver(response, convo);
+      convo.next();
+    }
+  },{
+      default: true,
+      callback: function(response,convo) {
+        convo.say('Please enter 1, 2, 3, 4, or 5');
+        // repeat the question
+        convo.repeat();
+        convo.next();
+      }
+  }], {
+    key: 'choiceShootingExptLvl'
   });
 };
+/*
+anotherPurchase = function(reponse, convo) {
+  getAnimals(reponse, convo);
+  getFood(reponse, convo);
+  getAmmo(reponse, convo);
+  getClothing();
+  getSupplies();
+  calculateCosts();
+};
+*/
 
-askWhereDeliver = function(response, convo) { 
+askWhereDeliver = function(response, convo) {
   convo.ask("So where do you want pizza delivered?", function(response, convo) {
     convo.say("Ok! Goodbye.");
     convo.next();
@@ -140,7 +163,7 @@ postInstructions = function(convo) {
     convo.say("GOOD LUCK!!!");
 };
 postRifle = function(convo) {
-  convo.say("CHOOSE YOUR RIFLE SKILL");
+  convo.say("CHOOSE YOUR RIFLE SKILL:");
   convo.say("(1) ACE MARKSMAN,  (2) GOOD SHOT,  (3) FAIR TO MIDDLIN'");
   convo.say("(4) NEED MORE PRACTICE,  (5) SHAKY KNEES");
   convo.say("ENTER ONE OF THE ABOVE,THE BETTER YOU CLAIM YOU ARE, THE");
