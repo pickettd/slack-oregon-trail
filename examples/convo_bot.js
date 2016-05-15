@@ -71,7 +71,7 @@ controller.spawn({
   }
 });
 
-controller.hears(['pizzatime'],['ambient'],function(bot,message) {
+controller.hears(['pizzatime'],['direct_message','direct_mention'],function(bot,message) {
   bot.startConversation(message, askFlavor);
 });
 
