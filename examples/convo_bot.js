@@ -91,8 +91,8 @@ askRifle = function(response, convo) {
   convo.ask("SO HOW GOOD A SHOT ARE YOU WITH YOUR RIFLE (1-5)?", [{
     pattern: '[1-5]',
     callback: function(response, convo) {
-      convo.say("Ok.");
-      askWhereDeliver(response, convo);
+      convo.say("TIME TO DECIDE WHAT TO BUY, YOU ONLY HAVE 300 AVAIABLE FOR ALL PURCHASES");
+      askAboutAnimals(response, convo);
       convo.next();
     }
   },{
@@ -107,16 +107,60 @@ askRifle = function(response, convo) {
     key: 'choiceShootingExptLvl'
   });
 };
-/*
-anotherPurchase = function(reponse, convo) {
-  getAnimals(reponse, convo);
-  getFood(reponse, convo);
-  getAmmo(reponse, convo);
-  getClothing();
-  getSupplies();
-  calculateCosts();
+
+askAboutAnimals = function(response, convo) {
+  convo.ask("HOW MUCH DO YOU WANT TO SPEND ON YOUR OXEN TEAM (minimum 201, maximum 299)?", [{
+    pattern: '[2][1-9][0-9]|[2][0][1-9]',
+    callback: function(response, convo) {
+      askAboutFood(response, convo);
+      convo.next();
+    }
+  },{
+      default: true,
+      callback: function(response,convo) {
+        convo.say('200 or less is too little but 300 or more is too much - please make a choice in the middle');
+        // repeat the question
+        convo.repeat();
+        convo.next();
+      }
+  }], {
+    key: 'animalsAMT'
+  });
 };
-*/
+
+askAboutFood = function(response, convo) {
+  convo.ask("HOW MUCH DO YOU WANT TO SPEND ON FOOD (must be more than 0)?", [{
+    pattern: '[1-9]\d*',
+    callback: function(response, convo) {
+      checkAboutPurchases(response, convo);
+      convo.next();
+    }
+  },{
+      default: true,
+      callback: function(response,convo) {
+        convo.say('You have to buy more than 0 food, please enter a number bigger than 0');
+        // repeat the question
+        convo.repeat();
+        convo.next();
+      }
+  }], {
+    key: 'foodAMT'
+  });
+};
+
+checkAboutPurchases = function(response, convo) {
+  var res = convo.extractResponses();
+  var animalsValue  = parseInt(convo.extractResponse('animalsAMT'));
+  var foodValue  = parseInt(convo.extractResponse('foodAMT'));
+
+  if ((animalsValue + foodValue) < 301) {
+    askWhereDeliver(response, convo)
+  }
+  else {
+    convo.say('You can\'t afford that much! You can only buy up to 300 total');
+    askAboutAnimals(response, convo);
+  }
+};
 
 askWhereDeliver = function(response, convo) {
   convo.ask("So where do you want pizza delivered?", function(response, convo) {
@@ -130,11 +174,11 @@ postInstructions = function(convo) {
     convo.say("INDEPENDENCE MISSOURI TO OREGON CITY, OREGON IN 1847.");
     convo.say("YOUR FAMILY OF FIVE WILL COVER THE 2040 MILE OREGONTRAIL");
     convo.say("IN 5-6 MONTHS --- IF YOU MAKE IT ALIVE.");
-    convo.say("YOU HAD SAVED $900 TO SPEND FOR THE TRIP, AND YOU'VE JUST");
+    convo.say("YOU HAD SAVED $500 TO SPEND FOR THE TRIP, AND YOU'VE JUST");
     convo.say("   PAID $200 FOR A WAGON.");
-    convo.say("YOU WILL NEED TO SPEND THE REST OF YOUR MONEY ($700) ON THE");
+    convo.say("YOU WILL NEED TO SPEND THE REST OF YOUR MONEY ($200) ON THE");
     convo.say("   FOLLOWING ITEMS:");
-    convo.say("     OXEN *** YOU CAN SPEND $200-$300 ON YOUR TEAM");
+    convo.say("     OXEN *** YOU CAN SPEND $201-$299 ON YOUR TEAM");
     convo.say("            THE MORE YOU SPEND, THE FASTER YOU'LL GO");
     convo.say("               BECAUSE YOU'LL HAVE BETTER ANIMALS");
     convo.say("     FOOD *** THE MORE YOU HAVE, THE LESS CHANCE THERE");
