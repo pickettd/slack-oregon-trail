@@ -2,6 +2,8 @@
 
 This project is a fork the JS version of Oregon Trail from https://github.com/chairmanmow/synchro_trail and adapted for Slackbot play using https://github.com/howdyai/botkit. You can use the Heroku Deploy button to run the bot for your Slack team. Once you have the Heroku app deployed for the bot, setup a new bot user in your Slack team, and set the Heroku app's `token` environment variable to match the access token provided by Slack for the new bot you created.
 
+Once the bot is on your team, players can start a game by using Direct Message or Direct Mention with the bot and sending the message `oregontime`.
+
 Here's information about Botkit:
 
 # [Botkit](http://howdy.ai/botkit) - Building Blocks for Building Bots
