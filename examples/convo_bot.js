@@ -6,9 +6,7 @@
             \/_____/   \/_____/     \/_/   \/_/\/_/   \/_/     \/_/
             
 
-This is a sample Slack bot built with Botkit.
-
-This bot demonstrates a multi-stage conversation
+This is an Oregon Trail esque Slack bot built with Botkit.
 
 # RUN THE BOT:
 
@@ -24,23 +22,9 @@ This bot demonstrates a multi-stage conversation
 
   Find your bot inside Slack
 
-  Say: "pizzatime"
+  Use Direct Message or a Direct Mention for the bot and say: "oregontime"
 
-  The bot will reply "What flavor of pizza do you want?"
-
-  Say what flavor you want.
-  
-  The bot will reply "Awesome" "What size do you want?"
-
-  Say what size you want.
-
-  The bot will reply "Ok." "So where do you want it delivered?"
-  
-  Say where you want it delivered.
-  
-  The bot will reply "Ok! Goodbye."
-  
-  ...and will refrain from billing your card because this is just a demo :P
+  The bot will let you play our game!
 
 # EXTEND THE BOT:
 
@@ -91,10 +75,10 @@ askInstructions = function(response, convo) {
 
 askRifle = function(response, convo, thisGameObject) {
   postRifle(convo);
-  convo.ask("SO HOW GOOD A SHOT ARE YOU WITH YOUR RIFLE (1-5)?", [{
+  convo.ask("So how good a shot are you with your rifle (1-5)?", [{
     pattern: '^[1-5]$',
     callback: function(response, convo) {
-      convo.say("TIME TO DECIDE WHAT TO BUY, YOU ONLY HAVE 300 AVAILABLE FOR ALL PURCHASES");
+      convo.say("Time to decide what to buy, you only have 300 available for all purchases");
       askAboutAnimals(response, convo, thisGameObject);
       convo.next();
     }
@@ -112,7 +96,7 @@ askRifle = function(response, convo, thisGameObject) {
 };
 
 askAboutAnimals = function(response, convo, thisGameObject) {
-  convo.ask("HOW MUCH DO YOU WANT TO SPEND ON YOUR OXEN TEAM (minimum 201, maximum 299)?", [{
+  convo.ask("How much do you want to spend on your oxen team (minimum 201, maximum 299)?", [{
     pattern: '^[2][1-9][0-9]|[2][0][1-9]$',
     callback: function(response, convo) {
       askAboutFood(response, convo, thisGameObject);
@@ -132,7 +116,7 @@ askAboutAnimals = function(response, convo, thisGameObject) {
 };
 
 askAboutFood = function(response, convo, thisGameObject) {
-  convo.ask("HOW MUCH DO YOU WANT TO SPEND ON FOOD (must be more than 0)?", [{
+  convo.ask("How much do you want to spend on food (must be more than 0)?", [{
     pattern: "^[1-9]|[1-9][0-9]|[1-3][0-9][0-9]$",
     callback: function(response, convo) {
       checkAboutPurchases(response, convo, thisGameObject);
@@ -209,29 +193,20 @@ postInstructions = function(convo) {
     convo.say("INDEPENDENCE MISSOURI TO OREGON CITY, OREGON IN 1847.");
     convo.say("YOUR FAMILY OF FIVE WILL COVER A 275 MILE SEGMENT OF THE TRAIL --- IF YOU MAKE IT ALIVE.");
     convo.say("YOU HAD SAVED $500 TO SPEND FOR THE TRIP, AND YOU'VE JUST PAID $200 FOR A WAGON.");
-    convo.say("YOU WILL NEED TO SPEND THE REST OF YOUR MONEY ($200) ON THE");
-    convo.say("   FOLLOWING ITEMS:");
+    convo.say("YOU WILL NEED TO SPEND THE REST OF YOUR MONEY ($300) ON THE FOLLOWING ITEMS:");
     convo.say("     OXEN *** YOU CAN SPEND $201-$299 ON YOUR TEAM");
     convo.say("            THE MORE YOU SPEND, THE FASTER YOU'LL GO");
     convo.say("               BECAUSE YOU'LL HAVE BETTER ANIMALS");
     convo.say("     FOOD *** THE MORE YOU HAVE, THE LESS CHANCE THERE");
     convo.say("     IS OF GETTING SICK AND THE LONGER YOU CAN TRAVEL WITHOUT GETTING MORE");
     convo.say("YOU CAN SPEND ALL YOUR MONEY BEFORE YOU START YOUR TRIP -");
-    convo.say("OR YOU CAN SAVE SOME OF YOUR CASH TO SPEND AT FORTS ALONG");
-    convo.say("THE WAY WHEN YOU RUN LOW. HOWEVER, ITEMS COST MORE AT");
-    convo.say("THE FORTS. YOU CAN ALSO GO HUNTING ALONG THE WAY TO GET");
-    convo.say("MORE FOOD.");
-    convo.say("WHENEVER YOU HAVE TO USE YOUR TRUSTY RIFLE ALONG THE WAY,");
-    convo.say("YOU WILL BE TOLD TO TYPE IN A WORD (ONE THAT SOUNDS LIKE A");
-    convo.say("GUN SHOT). THE FASTER YOU TYPE IN THAT WORD AND HIT THE");
-    convo.say("**ENTER** KEY, THE BETTER LUCK YOU'LL HAVE WITH YOUR GUN.");
-    convo.say("AT EACH TURN, ALL ITEMS ARE SHOWN IN DOLLAR AMOUNTS");
-    convo.say("EXCEPT BULLETS");
+    convo.say("OR YOU CAN SAVE SOME OF YOUR CASH IN CASE YOU NEED IT ON THE WAY.");
+    convo.say("YOU ALSO MIGHT FIND FOOD ALONG THE WAY.");
+    convo.say("AT EACH TURN, ALL ITEMS ARE SHOWN IN DOLLAR AMOUNTS.");
     convo.say("WHEN ASKED TO ENTER MONEY AMOUNTS, DON'T USE A **$** SYMBOL.");
     convo.say("GOOD LUCK!!!");
 };
 postRifle = function(convo) {
   convo.say("CHOOSE YOUR RIFLE SKILL:");
-  convo.say("THE BETTER YOU CLAIM YOU ARE, THE FASTER YOU'LL HAVE TO BE WITH YOUR GUN TO BE SUCCESSFUL.");
   convo.say("(1) ACE MARKSMAN,  (2) GOOD SHOT,  (3) FAIR TO MIDDLIN' (4) NEED MORE PRACTICE,  (5) SHAKY KNEES");
 };
