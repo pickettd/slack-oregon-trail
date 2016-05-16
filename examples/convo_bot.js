@@ -241,8 +241,6 @@ postInstructions = function(convo) {
 };
 postRifle = function(convo) {
   convo.say("CHOOSE YOUR RIFLE SKILL:");
-  convo.say("THE BETTER YOU CLAIM YOU ARE, THE");
-  convo.say("FASTER YOU'LL HAVE TO BE WITH YOUR GUN TO BE SUCCESSFUL.");
-  convo.say("(1) ACE MARKSMAN,  (2) GOOD SHOT,  (3) FAIR TO MIDDLIN'");
-  convo.say("(4) NEED MORE PRACTICE,  (5) SHAKY KNEES");
+  convo.say("THE BETTER YOU CLAIM YOU ARE, THE FASTER YOU'LL HAVE TO BE WITH YOUR GUN TO BE SUCCESSFUL.");
+  convo.say("(1) ACE MARKSMAN,  (2) GOOD SHOT,  (3) FAIR TO MIDDLIN' (4) NEED MORE PRACTICE,  (5) SHAKY KNEES");
 };
