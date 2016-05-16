@@ -133,7 +133,7 @@ askAboutAnimals = function(response, convo, thisGameObject) {
 
 askAboutFood = function(response, convo, thisGameObject) {
   convo.ask("HOW MUCH DO YOU WANT TO SPEND ON FOOD (must be more than 0)?", [{
-    pattern: '^[1-9]\d*$',
+    pattern: "^[1-9]|[1-9][0-9]|[1-3][0-9][0-9]$",
     callback: function(response, convo) {
       checkAboutPurchases(response, convo, thisGameObject);
       convo.next();
@@ -241,8 +241,8 @@ postInstructions = function(convo) {
 };
 postRifle = function(convo) {
   convo.say("CHOOSE YOUR RIFLE SKILL:");
+  convo.say("THE BETTER YOU CLAIM YOU ARE, THE");
+  convo.say("FASTER YOU'LL HAVE TO BE WITH YOUR GUN TO BE SUCCESSFUL.");
   convo.say("(1) ACE MARKSMAN,  (2) GOOD SHOT,  (3) FAIR TO MIDDLIN'");
   convo.say("(4) NEED MORE PRACTICE,  (5) SHAKY KNEES");
-  convo.say("ENTER ONE OF THE ABOVE,THE BETTER YOU CLAIM YOU ARE, THE");
-  convo.say("FASTER YOU'LL HAVE TO BE WITH YOUR GUN TO BE SUCCESSFUL.");
 };
