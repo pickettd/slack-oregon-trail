@@ -159,7 +159,7 @@ checkAboutPurchases = function(response, convo, thisGameObject) {
   if ((animalsValue + foodValue) < 301) {
     thisGameObject.animalsValue = animalsValue;
     thisGameObject.foodValue=foodValue-food_each_round_const;
-    thisGameObject.totalMileage = Math.round(200+(thisGameObject.animalsValue-220)/5+10*Math.random());
+    thisGameObject.totalMileage = Math.round(200+(thisGameObject.animalsValue-200)/5+10*Math.random());
     processRoundAskAboutFruit(response, convo, thisGameObject);
   }
   else {
@@ -188,8 +188,8 @@ processRoundAskAboutFruit = function(response, convo, thisGameObject) {
         }
         else {
           thisGameObject.foodValue=thisGameObject.foodValue-food_each_round_const;
-          thisGameObject.totalMileage = Math.round(thisGameObject.totalMileage+(thisGameObject.animalsValue-220)/5+10*Math.random());
-          if (thisGameObject.totalMileage > 300) {
+          thisGameObject.totalMileage = Math.round(thisGameObject.totalMileage+(thisGameObject.animalsValue-200)/5+10*Math.random());
+          if (thisGameObject.totalMileage > 274) {
             convo.say('You\'ve finished the journey! CONGRATULATIONS');
           }
           else if (thisGameObject.foodValue <= 0) {
@@ -204,20 +204,11 @@ processRoundAskAboutFruit = function(response, convo, thisGameObject) {
   }]);
 }
 
-askWhereDeliver = function(response, convo, thisGameObject) {
-  convo.ask("So where do you want pizza delivered?", function(response, convo) {
-    convo.say("Ok! Goodbye.");
-    convo.next();
-  });
-};
-
 postInstructions = function(convo) {
-    convo.say("THIS PROGRAM SIMULATES A TRIP OVER THE OREGON TRAIL FROM");
+    convo.say("THIS PROGRAM SIMULATES A TRIP OVER A PORTION OF THE OREGON TRAIL FROM");
     convo.say("INDEPENDENCE MISSOURI TO OREGON CITY, OREGON IN 1847.");
-    convo.say("YOUR FAMILY OF FIVE WILL COVER THE 2040 MILE OREGON TRAIL");
-    convo.say("IN 5-6 MONTHS --- IF YOU MAKE IT ALIVE.");
-    convo.say("YOU HAD SAVED $500 TO SPEND FOR THE TRIP, AND YOU'VE JUST");
-    convo.say("   PAID $200 FOR A WAGON.");
+    convo.say("YOUR FAMILY OF FIVE WILL COVER A 275 MILE SEGMENT OF THE TRAIL --- IF YOU MAKE IT ALIVE.");
+    convo.say("YOU HAD SAVED $500 TO SPEND FOR THE TRIP, AND YOU'VE JUST PAID $200 FOR A WAGON.");
     convo.say("YOU WILL NEED TO SPEND THE REST OF YOUR MONEY ($200) ON THE");
     convo.say("   FOLLOWING ITEMS:");
     convo.say("     OXEN *** YOU CAN SPEND $201-$299 ON YOUR TEAM");
