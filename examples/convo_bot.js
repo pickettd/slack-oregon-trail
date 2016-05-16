@@ -192,7 +192,7 @@ processRoundAskAboutFruit = function(response, convo, thisGameObject) {
           if (thisGameObject.totalMileage > 300) {
             convo.say('You\'ve finished the journey! CONGRATULATIONS');
           }
-          else if (thisGameObject.foodValue <= food_each_round_const) {
+          else if (thisGameObject.foodValue <= 0) {
             convo.say('All of you starve and are unable to complete the trail. GAME OVER');
           }
           else {
