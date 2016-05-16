@@ -6,7 +6,7 @@
     "token": {
       "description": "Slack bot RTM API token",
       "required": true
-    },
+    }
   },
   "image": "heroku/nodejs"
 }
