@@ -1,12 +1,14 @@
 [![Deploy OregonBot](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy) - Deploy Oregon Bot
 
-This project is a fork the JS version of Oregon Trail from https://github.com/chairmanmow/synchro_trail and adapted for Slackbot play using https://github.com/howdyai/botkit. You can use the Heroku Deploy button to run the bot for your Slack team. Once you have the Heroku app deployed for the bot, setup a new bot user in your Slack team, and set the Heroku app's `token` environment variable to match the access token provided by Slack for the new bot you created.
+This project is a fork the JS version of Oregon Trail from https://github.com/chairmanmow/synchro_trail and adapted for Slackbot play using https://github.com/howdyai/botkit. To install the bot in your Slack team you will first need to create a bot user (in the integration settings) so that you will have a Slack access token string. Once you have the access token you can use the Heroku Deploy button to run the bot for your Slack team (and set the `token` environment variable to match the value for the new bot you created).
 
-Once the bot is on your team, players can start a game by using Direct Message or Direct Mention with the bot and sending the message `oregontime`.
+When you see the bot online in your team list, players can start a game by using Direct Message or Direct Mention with the bot and sending the message `oregontime`.
+
+------------------------------------------------------------------------------------------------------------------------
 
 Here's information about Botkit:
 
-# [Botkit](http://howdy.ai/botkit) - Building Blocks for Building Bots
+[Botkit](http://howdy.ai/botkit) - Building Blocks for Building Bots
 
 [![npm](https://img.shields.io/npm/v/botkit.svg)](https://www.npmjs.com/package/botkit)
 [![David](https://img.shields.io/david/howdyai/botkit.svg)](https://david-dm.org/howdyai/botkit)
