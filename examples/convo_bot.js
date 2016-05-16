@@ -92,9 +92,9 @@ askInstructions = function(response, convo) {
 askRifle = function(response, convo, thisGameObject) {
   postRifle(convo);
   convo.ask("SO HOW GOOD A SHOT ARE YOU WITH YOUR RIFLE (1-5)?", [{
-    pattern: '[1-5]',
+    pattern: '^[1-5]$',
     callback: function(response, convo) {
-      convo.say("TIME TO DECIDE WHAT TO BUY, YOU ONLY HAVE 300 AVAIABLE FOR ALL PURCHASES");
+      convo.say("TIME TO DECIDE WHAT TO BUY, YOU ONLY HAVE 300 AVAILABLE FOR ALL PURCHASES");
       askAboutAnimals(response, convo, thisGameObject);
       convo.next();
     }
@@ -113,7 +113,7 @@ askRifle = function(response, convo, thisGameObject) {
 
 askAboutAnimals = function(response, convo, thisGameObject) {
   convo.ask("HOW MUCH DO YOU WANT TO SPEND ON YOUR OXEN TEAM (minimum 201, maximum 299)?", [{
-    pattern: '[2][1-9][0-9]|[2][0][1-9]',
+    pattern: '^[2][1-9][0-9]|[2][0][1-9]$',
     callback: function(response, convo) {
       askAboutFood(response, convo, thisGameObject);
       convo.next();
@@ -133,7 +133,7 @@ askAboutAnimals = function(response, convo, thisGameObject) {
 
 askAboutFood = function(response, convo, thisGameObject) {
   convo.ask("HOW MUCH DO YOU WANT TO SPEND ON FOOD (must be more than 0)?", [{
-    pattern: '[1-9]\d*',
+    pattern: '^[1-9]\d*$',
     callback: function(response, convo) {
       checkAboutPurchases(response, convo, thisGameObject);
       convo.next();
@@ -176,10 +176,10 @@ processRoundAskAboutFruit = function(response, convo, thisGameObject) {
   convo.say('Right now you have '+thisGameObject.foodValue+' food left.');
   convo.say('And you have progressed '+thisGameObject.totalMileage+' miles so far.');
   if (thisGameObject.foodValue <= food_each_round_const) {
-    convo.say('You will starve next round if you don\t get more food');
+    convo.say('You will starve next round if you don\'t get more food');
   }
 
-  convo.ask("You see a box of fruit near the path abandoned by a previous caravan. Do you want to eat it?", [{
+  convo.ask("You see a box of fruit near the path abandoned by a previous caravan. Do you want to eat it (Yes/No)?", [{
       default: true,
       callback: function(response,convo) {
         var yesNoHere = response.text.toUpperCase();
@@ -214,7 +214,7 @@ askWhereDeliver = function(response, convo, thisGameObject) {
 postInstructions = function(convo) {
     convo.say("THIS PROGRAM SIMULATES A TRIP OVER THE OREGON TRAIL FROM");
     convo.say("INDEPENDENCE MISSOURI TO OREGON CITY, OREGON IN 1847.");
-    convo.say("YOUR FAMILY OF FIVE WILL COVER THE 2040 MILE OREGONTRAIL");
+    convo.say("YOUR FAMILY OF FIVE WILL COVER THE 2040 MILE OREGON TRAIL");
     convo.say("IN 5-6 MONTHS --- IF YOU MAKE IT ALIVE.");
     convo.say("YOU HAD SAVED $500 TO SPEND FOR THE TRIP, AND YOU'VE JUST");
     convo.say("   PAID $200 FOR A WAGON.");
@@ -224,16 +224,7 @@ postInstructions = function(convo) {
     convo.say("            THE MORE YOU SPEND, THE FASTER YOU'LL GO");
     convo.say("               BECAUSE YOU'LL HAVE BETTER ANIMALS");
     convo.say("     FOOD *** THE MORE YOU HAVE, THE LESS CHANCE THERE");
-    convo.say("               IS OF GETTING SICK");
-    convo.say("     AMMUNITION *** $1 BUYS A BELT OF 50 BULLETS");
-    convo.say("            YOU WILL NEED BULLETS FOR ATTACKS BY ANIMALS");
-    convo.say("               AND BANDITS, AND FOR HUNTING FOOD");
-    convo.say("     CLOTHING *** THIS IS ESPECIALLY IMPORTANT FOR THE COLD");
-    convo.say("               WEATHER YOU WILL ENCOUNTER WHEN CROSSING");
-    convo.say("               THE MOUNTAINS");
-    convo.say("     MISCELLANEOUS SUPPLIES *** THIS INCLUDES MEDICINE AND");
-    convo.say("               OTHER THINGS YOU WILL NEED FOR SICKNESS");
-    convo.say("               AND EMERGENCY REPAIRS");
+    convo.say("     IS OF GETTING SICK AND THE LONGER YOU CAN TRAVEL WITHOUT GETTING MORE");
     convo.say("YOU CAN SPEND ALL YOUR MONEY BEFORE YOU START YOUR TRIP -");
     convo.say("OR YOU CAN SAVE SOME OF YOUR CASH TO SPEND AT FORTS ALONG");
     convo.say("THE WAY WHEN YOU RUN LOW. HOWEVER, ITEMS COST MORE AT");
@@ -245,7 +236,7 @@ postInstructions = function(convo) {
     convo.say("**ENTER** KEY, THE BETTER LUCK YOU'LL HAVE WITH YOUR GUN.");
     convo.say("AT EACH TURN, ALL ITEMS ARE SHOWN IN DOLLAR AMOUNTS");
     convo.say("EXCEPT BULLETS");
-    convo.say("WHEN ASKED TO ENTER MONEY AMOUNTS, DON'T USE A **$**.");
+    convo.say("WHEN ASKED TO ENTER MONEY AMOUNTS, DON'T USE A **$** SYMBOL.");
     convo.say("GOOD LUCK!!!");
 };
 postRifle = function(convo) {
