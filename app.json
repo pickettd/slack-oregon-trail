@@ -1,6 +1,6 @@
 {
   "name": "Oregon Bot App",
-  "description": "Oregon Bot is a Slack bot that allows a player to play a Oregon Trail inspired text adventure using Direct Message or Direct Mentions. You must set the token environment variable to match the token for the oregon bot user in your Slack team.",
+  "description": "Oregon Bot is a Slack bot to play a Oregon Trail inspired text adventure using Direct Message or Direct Mentions.",
   "repository": "https://github.com/pickettd/slack-oregon-trail",
   "env": {
     "token": {
