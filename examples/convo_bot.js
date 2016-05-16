@@ -54,6 +54,8 @@ This bot demonstrates a multi-stage conversation
 
 var Botkit = require('../lib/Botkit.js');
 
+food_each_round_const = 10;
+
 if (!process.env.token) {
   console.log('Error: Specify token in environment');
   process.exit(1);
@@ -81,18 +83,19 @@ askInstructions = function(response, convo) {
     if(yesNo[0] == "Y") {
       postInstructions(convo);
     }
-    askRifle(response, convo);
+    var thisGameObject = {};
+    askRifle(response, convo, thisGameObject);
     convo.next();
   });
 };
 
-askRifle = function(response, convo) {
+askRifle = function(response, convo, thisGameObject) {
   postRifle(convo);
   convo.ask("SO HOW GOOD A SHOT ARE YOU WITH YOUR RIFLE (1-5)?", [{
     pattern: '[1-5]',
     callback: function(response, convo) {
       convo.say("TIME TO DECIDE WHAT TO BUY, YOU ONLY HAVE 300 AVAIABLE FOR ALL PURCHASES");
-      askAboutAnimals(response, convo);
+      askAboutAnimals(response, convo, thisGameObject);
       convo.next();
     }
   },{
@@ -108,11 +111,11 @@ askRifle = function(response, convo) {
   });
 };
 
-askAboutAnimals = function(response, convo) {
+askAboutAnimals = function(response, convo, thisGameObject) {
   convo.ask("HOW MUCH DO YOU WANT TO SPEND ON YOUR OXEN TEAM (minimum 201, maximum 299)?", [{
     pattern: '[2][1-9][0-9]|[2][0][1-9]',
     callback: function(response, convo) {
-      askAboutFood(response, convo);
+      askAboutFood(response, convo, thisGameObject);
       convo.next();
     }
   },{
@@ -128,11 +131,11 @@ askAboutAnimals = function(response, convo) {
   });
 };
 
-askAboutFood = function(response, convo) {
+askAboutFood = function(response, convo, thisGameObject) {
   convo.ask("HOW MUCH DO YOU WANT TO SPEND ON FOOD (must be more than 0)?", [{
     pattern: '[1-9]\d*',
     callback: function(response, convo) {
-      checkAboutPurchases(response, convo);
+      checkAboutPurchases(response, convo, thisGameObject);
       convo.next();
     }
   },{
@@ -148,21 +151,60 @@ askAboutFood = function(response, convo) {
   });
 };
 
-checkAboutPurchases = function(response, convo) {
+checkAboutPurchases = function(response, convo, thisGameObject) {
   var res = convo.extractResponses();
   var animalsValue  = parseInt(convo.extractResponse('animalsAMT'));
   var foodValue  = parseInt(convo.extractResponse('foodAMT'));
 
   if ((animalsValue + foodValue) < 301) {
-    askWhereDeliver(response, convo)
+    thisGameObject.animalsValue = animalsValue;
+    thisGameObject.foodValue=foodValue-food_each_round_const;
+    thisGameObject.totalMileage = Math.round(200+(thisGameObject.animalsValue-220)/5+10*Math.random());
+    processRoundAskAboutFruit(response, convo, thisGameObject);
   }
   else {
     convo.say('You can\'t afford that much! You can only buy up to 300 total');
-    askAboutAnimals(response, convo);
+    askAboutAnimals(response, convo, thisGameObject);
   }
 };
 
-askWhereDeliver = function(response, convo) {
+processRoundAskAboutFruit = function(response, convo, thisGameObject) {
+  if (thisGameObject.foodValue < 0) {
+    thisGameObject.foodValue = 0;
+  }
+  convo.say("You are making process on your trip and get to an well worn pitstop on the trail");
+  convo.say('Right now you have '+thisGameObject.foodValue+' food left.');
+  convo.say('And you have progressed '+thisGameObject.totalMileage+' miles so far.');
+  if (thisGameObject.foodValue <= food_each_round_const) {
+    convo.say('You will starve next round if you don\t get more food');
+  }
+
+  convo.ask("You see a box of fruit near the path abandoned by a previous caravan. Do you want to eat it?", [{
+      default: true,
+      callback: function(response,convo) {
+        var yesNoHere = response.text.toUpperCase();
+        if(yesNoHere[0] == "Y") {
+          convo.say('All of you get dysentery and are unable to complete the trail. GAME OVER');
+        }
+        else {
+          thisGameObject.foodValue=thisGameObject.foodValue-food_each_round_const;
+          thisGameObject.totalMileage = Math.round(200+(thisGameObject.animalsValue-220)/5+10*Math.random());
+          if (thisGameObject.totalMileage > 300) {
+            convo.say('You\'ve finished the journey! CONGRATULATIONS');
+          }
+          else if (thisGameObject.foodValue <= food_each_round_const) {
+            convo.say('All of you starve and are unable to complete the trail. GAME OVER');
+          }
+          else {
+            processRoundAskAboutFruit(response, convo, thisGameObject);
+          }
+        }
+        convo.next();
+      }
+  }]);
+}
+
+askWhereDeliver = function(response, convo, thisGameObject) {
   convo.ask("So where do you want pizza delivered?", function(response, convo) {
     convo.say("Ok! Goodbye.");
     convo.next();
