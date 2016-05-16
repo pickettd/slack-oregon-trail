@@ -188,7 +188,7 @@ processRoundAskAboutFruit = function(response, convo, thisGameObject) {
         }
         else {
           thisGameObject.foodValue=thisGameObject.foodValue-food_each_round_const;
-          thisGameObject.totalMileage = Math.round(200+(thisGameObject.animalsValue-220)/5+10*Math.random());
+          thisGameObject.totalMileage = Math.round(thisGameObject.totalMileage+(thisGameObject.animalsValue-220)/5+10*Math.random());
           if (thisGameObject.totalMileage > 300) {
             convo.say('You\'ve finished the journey! CONGRATULATIONS');
           }
